@@ -17,8 +17,8 @@ void push(int data)
     {
         stackNode *temp = (stackNode*)malloc(sizeof(stackNode));
         int data;
-        printf("Enter Data to Add in Stack :  ");
-        scanf("%d", &data);
+        //printf("Enter Data to Add in Stack :  ");
+        //scanf("%d", &data);
         temp->data = data;
         if (head == NULL)
         {
@@ -33,29 +33,34 @@ void push(int data)
     }
     else
     {
-        printf("Stack is Full, cannot push data");
+        return;
+        //printf("Stack is Full, cannot push data");
     }
  
 }
 
-void pop()
+int pop()
 {
     if(head == NULL)
     {
-        printf("Stack is Empty, No data to POP");
+        return;
+        //printf("Stack is Empty, No data to POP");
     }
     else if(head->next == NULL)
     {
-        printf("Popped Data : %d", head->data);
+        int ret = head->data;
         free(head);
         head = NULL;
+        return ret;
     }
     else
     {
-        printf("Popped Data : %d", head->data);
+        int ret = head->data;
+        //printf("Popped Data : %d", head->data);
         stackNode *temp = head;
         head = head->next;
         free(temp);
+        return ret;
     }
     current--;
 }
@@ -75,14 +80,28 @@ void peek()
 
 int main()
 {
-    printf("Enter Maximum Array Size : ");
+    printf("Enter Maximum Array Size : ");          //Array Input
     scanf("%d", &max);
+    int *arr = (int*)malloc(max * sizeof(int));
     printf("Enter Data for the Aray: ");
     for (int i = 0; i < max; i++) {
         scanf("%d", &arr[i]);
     }
     printf("Original Array: ");
     for (int i = 0; i < max; i++) {
-        scanf("%d\t", &arr[i]);
+        printf("%d\t", arr[i]);
     }
+    
+    for (int i = 0; i < max; i++) {
+        push(arr[i]);
+    }
+    for (int i = 0; i < max; i++) {
+        arr[i] = pop();
+    }
+    printf("Reversed Array: ");
+    for (int i = 0; i < max; i++) {
+        printf("%d\t", arr[i]);
+    }
+    
+    
 }
